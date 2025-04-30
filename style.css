@@ -1,9 +1,13 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 40px;
-  padding: 0;
-}
+/* Ajusta o calendário para ocupar 100% da largura, com uma margem nas laterais */
 #calendar {
-  max-width: 900px;
-  margin: 0 auto;
+  width: calc(100% - 40px);  /* Calcula 100% da largura menos 40px de margem total */
+  height: 80vh;               /* O calendário ocupa 80% da altura da janela */
+  margin: 20px auto;          /* Cria uma margem de 20px nas laterais e centraliza o calendário */
+  box-sizing: border-box;     /* Garante que o padding e margin não afetem a largura total */
+}
+
+/* Estilo básico para o evento */
+.user-event {
+  background-color: #ff5733; /* Cor do fundo */
+  color: white;              /* Cor do texto */
 }

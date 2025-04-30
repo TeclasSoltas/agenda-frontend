@@ -1,34 +1,31 @@
-const API_URL = 'https://agenda-backend-vr7o.onrender.com'; // domínio do Render
-
-fetch('${API_URL}/eventos')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-  });
-
-document.addEventListener('DOMContentLoaded', function () {
-  const calendarEl = document.getElementById('calendar');
-
-  const calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    events: '${API_URL}/eventos', // <- aqui substituído
-    selectable: true,
-    select: function(info) {
-      const title = prompt('Título do evento:');
-      if (title) {
-        fetch('${API_URL}/eventos', { // <- aqui também substituído
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            title: title,
-            start: info.startStr,
-            end: info.endStr
-          })
-        })
-        .then(() => calendar.refetchEvents());
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  
+  // Inicializa o FullCalendar
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth', // Exibe a visão mensal
+    
+    // Eventos iniciais (você pode adicionar eventos aqui também)
+    events: [
+      { title: 'Evento 1', start: '2025-04-30' },
+      { title: 'Evento 2', start: '2025-05-01' }
+    ],
+    
+    // Função para permitir que o usuário adicione eventos clicando em uma data
+   /* dateClick: function(info) {
+      var eventTitle = prompt('Digite o título do evento:');
+      if (eventTitle) {
+        // Adiciona o evento ao calendário
+        calendar.addEvent({
+          title: eventTitle,
+          start: info.dateStr,  // A data clicada
+          allDay: true,         // Define como um evento de dia inteiro
+          className: 'user-event' // Classe CSS para personalizar o evento
+        });
       }
-    }
+    }*/
   });
-
+  
+  // Renderiza o calendário
   calendar.render();
 });
